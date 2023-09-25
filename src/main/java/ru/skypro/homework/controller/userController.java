@@ -14,6 +14,11 @@ public class userController {
         System.out.println("successfully");
         return new UserDTO();
     }
+    @PatchMapping("/me")
+    public UserDTO getUser(@RequestBody Long userId) {
+        System.out.println("successfully");
+        return new UserDTO();
+    }
     @PatchMapping("/set_password")
     public ResponseEntity<String> updatePassword(@RequestParam("password") String newPassword) {
         System.out.println("successfully");
