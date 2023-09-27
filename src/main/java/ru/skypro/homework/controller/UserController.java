@@ -31,6 +31,4 @@ public class UserController {
         return ResponseEntity.ok("");
     }
 
-    public void gtid() {
-    }
 }
