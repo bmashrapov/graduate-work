@@ -30,4 +30,7 @@ public class UserController {
     public ResponseEntity<String> updateAvatar(@RequestParam MultipartFile image) {
         return ResponseEntity.ok("");
     }
+
+    public void gtid() {
+    }
 }
