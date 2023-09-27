@@ -3,21 +3,21 @@ package ru.skypro.homework.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.skypro.homework.dto.UserDTO;
+import ru.skypro.homework.dto.User;
 
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(value = "http://localhost:3000")
-public class userController {
+public class UserController {
     @PatchMapping("/me")
-    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
+    public User updateUser(@RequestBody User userDTO) {
         System.out.println("successfully");
-        return new UserDTO();
+        return new User();
     }
     @PatchMapping("/me")
-    public UserDTO getUser(@RequestBody Long userId) {
+    public User getUser(@RequestBody Long userId) {
         System.out.println("successfully");
-        return new UserDTO();
+        return new User();
     }
     @PatchMapping("/set_password")
     public ResponseEntity<String> updatePassword(@RequestParam("password") String newPassword) {
