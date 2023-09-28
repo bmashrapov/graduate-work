@@ -10,3 +10,6 @@ CREATE TABLE IF NOT EXISTS users (
     phone VARCHAR(15),
     role VARCHAR(15) NOT NULL CHECK (role IN ('Admin', 'User'))
     );
+-- changeset BM:2
+ALTER TABLE users
+    RENAME COLUMN id TO user_id;
