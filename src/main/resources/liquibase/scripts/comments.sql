@@ -9,3 +9,6 @@ create table if not exists comments
     comments_text  text,
     ad_id int not null references ads (ad_id) on delete cascade
 );
+
+-- changeset zavarka: 2
+alter table comments ALTER COLUMN created_at SET DATA TYPE BIGINT USING EXTRACT(EPOCH FROM created_at)::BIGINT;

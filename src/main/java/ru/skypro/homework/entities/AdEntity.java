@@ -15,15 +15,15 @@ public class AdEntity {
     @Id
     @Column(name = "ad_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pk;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity author;
     private String title;
-    private int price;
+    private Integer price;
     private String description;
 
-    public AdEntity(UserEntity author, String title, int price, String description) {
+    public AdEntity(UserEntity author, String title, Integer price, String description) {
         this.author = author;
         this.title = title;
         this.price = price;
