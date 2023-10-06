@@ -1,10 +1,7 @@
 package ru.skypro.homework.service;
 
-import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.User;
 import ru.skypro.homework.entities.UserEntity;
-
-import java.io.IOException;
 
 public interface UserService {
     User update(User user, String name);
@@ -14,8 +11,6 @@ public interface UserService {
     User get(String name);
 
     UserEntity getEntity(String name);
-
-    void uploadImage(MultipartFile image, String name) throws IOException;
 
     UserEntity getEntityById(int id);
 

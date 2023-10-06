@@ -3,9 +3,11 @@ package ru.skypro.homework.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
-import org.mapstruct.factory.Mappers;
 import ru.skypro.homework.dto.Comment;
+import ru.skypro.homework.dto.CreateOrUpdateComment;
+import ru.skypro.homework.entities.AdEntity;
 import ru.skypro.homework.entities.CommentEntity;
+import ru.skypro.homework.entities.UserEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CommentMapper {
@@ -21,5 +23,7 @@ public interface CommentMapper {
     @Mapping(source = "createAt", target = "createdAt")
 //    @Mapping(source = "text", target = "text")
     @Mapping(source = "pk", target = "ad")
-    CommentEntity commentToCommentEntity(Comment comment);
+    CommentEntity commentToCommentEntity(CreateOrUpdateComment comment, AdEntity entity, UserEntity entity1);
+
+//    CommentEntity commentToCommentEntity(CreateOrUpdateComment comment, AdEntity entity, UserEntity entity1);
 }
