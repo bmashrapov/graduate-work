@@ -8,7 +8,7 @@ import ru.skypro.homework.entities.CommentEntity;
 public interface CommentService {
     Comments getComments(int id);
 
-    Comment add(int id, CreateOrUpdateComment comment, String name);
+    Comment add(int id, Comment comment, String name);
 
     void delete(int commentId);
 

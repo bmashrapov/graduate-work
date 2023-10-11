@@ -22,6 +22,9 @@ public class AdEntity {
     private String title;
     private Integer price;
     private String description;
+    @OneToOne
+    @JoinColumn(name = "image_id")
+    private ImageEntity image;
 
     public AdEntity(UserEntity author, String title, Integer price, String description) {
         this.author = author;
@@ -29,5 +32,7 @@ public class AdEntity {
         this.price = price;
         this.description = description;
     }
-
+    public String getImagePath() {
+        return image == null ? null : "/ads/image/" + id;
+    }
 }

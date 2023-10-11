@@ -29,14 +29,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comments getComments(int id) {
         List<Comment> result = new LinkedList<>();
-        commentRepository.findAllByAd_Id(id).forEach(entity -> result.add(mapper.commentEntityToComment(entity)));
+        commentRepository.findAllByAd_Id(id).forEach(entity -> result.add(mapper.entityToCommentDto(entity)));
         return new Comments(result.size(), result);
     }
 
     @Override
-    public Comment add(int id, CreateOrUpdateComment comment, String name) {
-        CommentEntity entity = mapper.commentToCommentEntity(comment, adService.getEntity(id), userService.getEntity(name));
-        return mapper.commentEntityToComment(commentRepository.save(entity));
+    public Comment add(int id, Comment comment, String name) {
+        CommentEntity entity = mapper.commentToEntity(comment, adService.getEntity(id), userService.getEntity(name));
+        return mapper.entityToCommentDto(commentRepository.save(entity));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
         CommentEntity entity = getEntity(commentId);
         entity.setText(comment.getText() + "(отредактировал(а) " + userService.getEntity(email).getFirstName() +
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern(" dd MMMM yyyy в HH:mm:ss)")));
-        return mapper.commentEntityToComment(commentRepository.save(entity));
+        return mapper.entityToCommentDto(commentRepository.save(entity));
     }
 
     @Override

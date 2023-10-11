@@ -27,6 +27,9 @@ public class UserEntity {
     private String phone;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToOne
+    @JoinColumn(name = "image_id")
+    private ImageEntity image;
 
     public UserEntity(String password, String userName, String firstName, String lastName, String phone, Role role) {
         this.password = password;
@@ -35,5 +38,8 @@ public class UserEntity {
         this.lastName = lastName;
         this.phone = phone;
         this.role = role;
+    }
+    public String getImagePath() {
+        return image == null ? null : "/users/image/" + id;
     }
 }

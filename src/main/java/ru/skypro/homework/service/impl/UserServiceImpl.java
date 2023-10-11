@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user, String name) {
-        return mapper.userEntityToUser(userRepository.save(mapper.userToUserEntity(user, getEntity(name))));
+        return mapper.entityToUserDto(userRepository.save(mapper.userDtoToEntity(user, getEntity(name))));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User get(String name) {
-        return mapper.userEntityToUser(getEntity(name));
+        return mapper.entityToUserDto(getEntity(name));
     }
 
     @Override

@@ -27,6 +27,11 @@ public class CommentEntity {
     @ManyToOne
     @JoinColumn(name = "ad_id")
     private AdEntity ad;
+//    @OneToOne
+//    @JoinColumn(name = "author_image")
+//    private ImageEntity authorImage;
+//    @JoinColumn (name = "author_first_name")
+//    private String authorFirstName;
 
     public CommentEntity(UserEntity author, Long createdAt, String text, AdEntity ad) {
         this.author = author;
