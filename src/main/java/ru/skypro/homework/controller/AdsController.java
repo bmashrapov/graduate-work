@@ -28,7 +28,7 @@ public class AdsController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity postAds (@RequestParam CreateOrUpdateAd properties,
+    public ResponseEntity postAds (@RequestPart CreateOrUpdateAd properties,
                                    @RequestPart MultipartFile image){
         AdEntity entity = new AdEntity();
         return ResponseEntity.ok(new Ad(entity.getAuthor().getId(), entity.getImagePath(), entity.getId(), entity.getPrice(), entity.getTitle()));
