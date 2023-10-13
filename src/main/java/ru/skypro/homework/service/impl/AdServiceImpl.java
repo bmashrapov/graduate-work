@@ -28,7 +28,7 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad add(CreateOrUpdateAd properties, MultipartFile image, String email) throws IOException {
-        AdEntity ad = mapper.CreateOrUpdateAdToEntity(properties, userService.getEntity(email));
+        AdEntity ad = mapper.createOrUpdateAdToEntity(properties, userService.getEntity(email));
 //        ad.setImage(imageService.saveImage(image));
         return mapper.entityToAdsDto(adRepository.save(ad));
     }

@@ -14,7 +14,7 @@ public interface UserService {
 
     UserEntity getEntityById(int id);
 
-    void changePassword(String newPassword, String name);
+    void changePassword(String oldpassword, String newPassword, String name);
 
     boolean userExists(String username);
 
