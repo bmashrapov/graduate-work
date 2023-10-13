@@ -46,7 +46,7 @@ public class AdMapper {
                 entity.getAuthor().getPhone(), entity.getPrice(), entity.getTitle());
     }
 
-    public AdEntity CreateOrUpdateAdToEntity(CreateOrUpdateAd ads, UserEntity author) {
+    public AdEntity createOrUpdateAdToEntity(CreateOrUpdateAd ads, UserEntity author) {
         return new AdEntity(author, ads.getTitle(), ads.getPrice(), ads.getDescription());
     }
 }
