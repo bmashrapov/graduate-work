@@ -8,10 +8,12 @@ import ru.skypro.homework.dto.Ads;
 import ru.skypro.homework.dto.CreateOrUpdateAd;
 import ru.skypro.homework.dto.ExtendedAd;
 import ru.skypro.homework.entities.AdEntity;
+import ru.skypro.homework.entities.ImageEntity;
 import ru.skypro.homework.exception.FindNoEntityException;
 import ru.skypro.homework.mappers.AdMapper;
 import ru.skypro.homework.repository.AdRepository;
 import ru.skypro.homework.service.AdService;
+import ru.skypro.homework.service.ImageService;
 import ru.skypro.homework.service.UserService;
 
 import java.io.IOException;
@@ -23,13 +25,13 @@ import java.util.List;
 public class AdServiceImpl implements AdService {
     private final AdRepository adRepository;
     private final UserService userService;
-//    private final ImageService imageService;
+    private final ImageService imageService;
     private final AdMapper mapper;
 
     @Override
     public Ad add(CreateOrUpdateAd properties, MultipartFile image, String email) throws IOException {
         AdEntity ad = mapper.createOrUpdateAdToEntity(properties, userService.getEntity(email));
-//        ad.setImage(imageService.saveImage(image));
+        ad.setImage(imageService.saveImage(image));
         return mapper.entityToAdsDto(adRepository.save(ad));
     }
 
@@ -40,9 +42,9 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public void delete(int id) throws IOException {
-//        ImageEntity image = getEntity(id).getImage();
+        ImageEntity image = getEntity(id).getImage();
         adRepository.deleteById(id);
-//        imageService.deleteImage(image);
+        imageService.deleteImage(image);
     }
 
     @Override
@@ -62,13 +64,13 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public void uploadImage(int id, MultipartFile image) throws IOException {
-//        AdEntity adEntity = getEntity(id);
-//        ImageEntity imageEntity = adEntity.getImage();
-//        adEntity.setImage(imageService.saveImage(image));
-//        adRepository.save(adEntity);
-//        if (imageEntity != null) {
-//            imageService.deleteImage(imageEntity);
-//        }
+        AdEntity adEntity = getEntity(id);
+        ImageEntity imageEntity = adEntity.getImage();
+        adEntity.setImage(imageService.saveImage(image));
+        adRepository.save(adEntity);
+        if (imageEntity != null) {
+            imageService.deleteImage(imageEntity);
+        }
     }
 
     @Override
