@@ -78,7 +78,7 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ads getAllMyAds(String name) {
-        return getWrapper(adRepository.findAllByAuthor(name));
+        return getWrapper(adRepository.findAllByAuthor_userName(name));
     }
 
     private Ads getWrapper(List<AdEntity> list) {
