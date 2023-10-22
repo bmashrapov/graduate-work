@@ -17,7 +17,7 @@ public class AdMapper {
 
     public ExtendedAd entityToExtendedAdsDto(AdEntity entity) {
         return new ExtendedAd(entity.getId(), entity.getAuthor().getFirstName(), entity.getAuthor().getLastName(),
-                entity.getAuthor().getUserName(), entity.getImagePath(),
+                entity.getAuthor().getEmail(), entity.getImagePath(),
                 entity.getAuthor().getPhone(), entity.getPrice(), entity.getTitle());
     }
 

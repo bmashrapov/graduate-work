@@ -16,3 +16,6 @@ ALTER TABLE users
 -- changeset BM:3
 ALTER TABLE users
     RENAME COLUMN username TO user_name;
+-- changeset BM:4
+ALTER TABLE users
+    RENAME COLUMN user_name TO email;

@@ -12,7 +12,6 @@ import ru.skypro.homework.dto.Ad;
 import ru.skypro.homework.dto.Ads;
 import ru.skypro.homework.dto.CreateOrUpdateAd;
 import ru.skypro.homework.dto.ExtendedAd;
-import ru.skypro.homework.entities.AdEntity;
 import ru.skypro.homework.service.AdService;
 import ru.skypro.homework.service.ImageService;
 
@@ -27,7 +26,7 @@ public class AdsController {
     private final ImageService imageService;
 
     @GetMapping
-    public ResponseEntity getAds (){
+    public ResponseEntity <Ads> getAds (){
         return ResponseEntity.ok(adService.getAllAds());
     }
 
@@ -37,22 +36,21 @@ public class AdsController {
         return ResponseEntity.status(201).body(adService.add(properties,image,authentication.getName()));
     }
     @GetMapping("{id}")
-    public ResponseEntity <ExtendedAd> getById (@PathVariable(name= "id") Integer id){
+    public ResponseEntity <ExtendedAd> getById (@PathVariable Integer id){
         return ResponseEntity.ok(adService.getFullAdsById(id));
     }
 
-    @DeleteMapping("{id}")
-    @PreAuthorize("@adServiceImpl.getEntity(#id).author.userName.equals(#auth.name) or hasAuthority('DELETE_ANY_AD')")
-    public ResponseEntity<?> removeById (@PathVariable(name= "id") Integer id) throws IOException{
+    @DeleteMapping("/{id}")
+    @PreAuthorize("@adServiceImpl.getEntity(#id).author.email.equals(#auth.name) or hasAuthority('DELETE_ANY_AD')")
+    public ResponseEntity<?> removeAd(@PathVariable int id, Authentication auth) throws IOException {
         adService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("{id}")
-    @PreAuthorize("@adServiceImpl.getEntity(#id).author.userName.equals(#auth.name) or hasAuthority('UPDATE_ANY_AD')")
-    public ResponseEntity<Ad> updateAds (@PathVariable (name ="id") Integer id,
-                                     @RequestBody CreateOrUpdateAd properties, Authentication authentication){
-        return ResponseEntity.ok(adService.update(id, properties));
+    @PatchMapping("/{id}")
+    @PreAuthorize("@adServiceImpl.getEntity(#id).author.email.equals(#auth.name) or hasAuthority('UPDATE_ANY_AD')")
+    public ResponseEntity<Ad> updateAds(@PathVariable int id, @RequestBody CreateOrUpdateAd ads, Authentication auth) {
+        return ResponseEntity.ok(adService.update(id, ads));
     }
 
     @GetMapping("/me")
@@ -65,5 +63,10 @@ public class AdsController {
                                        @RequestParam MultipartFile image) throws IOException{
         adService.uploadImage(id, image);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/image/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable int id) throws IOException {
+        long imageId = adService.getEntity(id).getImage().getId();
+        return ResponseEntity.ok(imageService.getImage(imageId));
     }
 }

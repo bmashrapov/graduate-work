@@ -15,7 +15,7 @@ public class UserDetailsManagerImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        return new UserSecurity(repository.findByUserName(username)
+        return new UserSecurity(repository.findByEmail(username)
                 .orElseThrow(() -> new FindNoEntityException("пользователь")));
     }
 }

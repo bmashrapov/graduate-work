@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.Comment;
+import ru.skypro.homework.dto.Comments;
 import ru.skypro.homework.service.CommentService;
 
 @RestController
@@ -16,28 +17,24 @@ public class CommentController {
     private final CommentService commentService;
 
     @GetMapping("{id}/comments")
-    public ResponseEntity getComment(@PathVariable Integer id) {
+    public ResponseEntity <Comments> getComment(@PathVariable Integer id) {
         return ResponseEntity.ok(commentService.getComments(id));
     }
 
     @PostMapping("{id}/comments")
-    public ResponseEntity postComments(@PathVariable Integer id,
+    public ResponseEntity <Comment> postComments(@PathVariable Integer id,
                                        @RequestBody Comment text, Authentication authentication) {
         return ResponseEntity.ok(commentService.add(id, text, authentication.getName()));
     }
 
-    @DeleteMapping("{adId}/comments/{commentsId}")
-    public ResponseEntity removeComments(@PathVariable(name = "adId") Integer adId,
-                                         @PathVariable(name = "commentsId") Integer commentId) {
-        return ResponseEntity.ok("");
+    @DeleteMapping("{adId}/comments/{commentId}")
+    @PreAuthorize("@commentServiceImpl.getEntity(#commentId).author.email.equals(#auth.name) " +
+            "or hasAuthority('DELETE_ANY_COMMENT')")
+    public ResponseEntity<?> removeComment(@PathVariable int adId, @PathVariable int commentId, Authentication auth) {
+        commentService.delete(commentId);
+        return ResponseEntity.ok().build();
     }
 
-//    @PatchMapping("{adId}/comments/{commentsId}")
-//    public ResponseEntity updateComments(@PathVariable(name = "adId") Integer adId,
-//                                         @PathVariable(name = "commentsId") Integer commentsId,
-//                                         @RequestBody CreateOrUpdateComment text) {
-//        return ResponseEntity.ok(commentService.update(commentsId,text,));
-//    }
     @PatchMapping("/{adId}/comments/{commentId}")
     @PreAuthorize("@commentServiceImpl.getEntity(#commentId).author.email.equals(#auth.name) " +
             "or hasAuthority('UPDATE_ANY_COMMENT')")
