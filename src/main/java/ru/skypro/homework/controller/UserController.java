@@ -30,7 +30,7 @@ public class UserController {
         if (authService.setPassword(newPassword, authentication.getName())) {
             return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
