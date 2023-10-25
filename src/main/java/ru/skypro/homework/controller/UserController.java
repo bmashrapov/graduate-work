@@ -25,9 +25,9 @@ public class UserController {
     private final AuthService authService;
     private final ImageService imageService;
     @PostMapping("/set_password")
-    public ResponseEntity<?> setPassword(@RequestBody String oldPassword, NewPassword newPassword,
+    public ResponseEntity<?> setPassword(@RequestBody NewPassword newPassword,
                                          Authentication authentication) {
-        if (authService.setPassword(oldPassword, newPassword, authentication.getName())) {
+        if (authService.setPassword(newPassword, authentication.getName())) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

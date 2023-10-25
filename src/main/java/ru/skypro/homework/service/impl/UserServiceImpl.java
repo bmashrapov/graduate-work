@@ -1,7 +1,6 @@
 package ru.skypro.homework.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.UpdateUser;
@@ -16,14 +15,12 @@ import ru.skypro.homework.service.UserService;
 
 
 import java.io.IOException;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper mapper;
-    private final PasswordEncoder passwordEncoder;
     private final ImageService imageService;
 
     @Override
@@ -52,26 +49,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(String oldPassword, String newPassword, String name) {
-        Optional<UserEntity> userOptional = userRepository.findByEmail(name);
-
-        if (userOptional.isPresent()) {
-            UserEntity user = userOptional.get();
-
-            if (passwordsMatch(oldPassword, user.getPassword())) {
-                String newPasswordHash = passwordEncoder.encode(newPassword);
-                user.setPassword(newPasswordHash);
-                userRepository.save(user);
-            } else {
-                throw new FindNoEntityException("Неправильный старый пароль");
-            }
-        } else {
-            throw new FindNoEntityException("Пользователь не найден");
-        }
-    }
-
-    private boolean passwordsMatch(String inputPassword, String storedPasswordHash) {
-        return passwordEncoder.matches(inputPassword, storedPasswordHash);
+    public void changePassword(String newPassword, String name) {
+        UserEntity entity = getEntity(name);
+        entity.setPassword(newPassword);
+        userRepository.save(entity);
     }
 
     @Override

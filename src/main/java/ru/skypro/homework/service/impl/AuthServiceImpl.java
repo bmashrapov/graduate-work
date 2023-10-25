@@ -40,9 +40,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public boolean setPassword(String oldPassword, NewPassword newPassword, String name) {
+    public boolean setPassword(NewPassword newPassword, String name) {
         if (encoder.matches(newPassword.getCurrentPassword(), manager.loadUserByUsername(name).getPassword())) {
-            userService.changePassword(oldPassword, encoder.encode(newPassword.getNewPassword()), name);
+            userService.changePassword(encoder.encode(newPassword.getNewPassword()), name);
             return true;
         }
         return false;
