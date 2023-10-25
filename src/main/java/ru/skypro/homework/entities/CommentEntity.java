@@ -21,14 +21,14 @@ public class CommentEntity {
     @JoinColumn(name = "user_id")
     private UserEntity author;
     @Column(name = "created_at")
-    private Long createdAt;
+    private LocalDateTime createdAt;
     @Column(name = "comments_text")
     private String text;
     @ManyToOne
     @JoinColumn(name = "ad_id")
     private AdEntity ad;
 
-    public CommentEntity(UserEntity author, Long createdAt, String text, AdEntity ad) {
+    public CommentEntity(UserEntity author, LocalDateTime createdAt, String text, AdEntity ad) {
         this.author = author;
         this.createdAt = createdAt;
         this.text = text;

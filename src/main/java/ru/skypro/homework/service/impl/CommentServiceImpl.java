@@ -34,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment add(int id, Comment comment, String name) {
+    public Comment add(int id, CreateOrUpdateComment comment, String name) {
         CommentEntity entity = mapper.commentToEntity(comment, adService.getEntity(id), userService.getEntity(name));
         return mapper.entityToCommentDto(commentRepository.save(entity));
     }

@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.Comment;
 import ru.skypro.homework.dto.Comments;
+import ru.skypro.homework.dto.CreateOrUpdateComment;
 import ru.skypro.homework.service.CommentService;
 
 @RestController
@@ -23,7 +24,7 @@ public class CommentController {
 
     @PostMapping("{id}/comments")
     public ResponseEntity <Comment> postComments(@PathVariable Integer id,
-                                       @RequestBody Comment text, Authentication authentication) {
+                                                 @RequestBody CreateOrUpdateComment text, Authentication authentication) {
         return ResponseEntity.ok(commentService.add(id, text, authentication.getName()));
     }
 
