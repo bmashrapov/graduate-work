@@ -28,10 +28,10 @@
 Инструкция по установке и запуску приложения: 
 -
 - Клонируйте проект в среду разработки;
-- Внесите/Измените данные в application.properties для datasource.url, datasource.username, datasource.password;
+- Внесите данные из application.orogin в application.properties и подставьте данные для datasource.url, datasource.username, datasource.password;
 - Запустите Docker образ (docker run -p 3000:3000 --rm ghcr.io/bizinmitya/front-react-avito:v1.19) или воспользуйтесь Postman;
 - Запустите класс HomeworkApplication;
-- Логин/пароль предустановленного админа: superadmin@example.com/123456789
+- Логин и пароль администратора по умолчанию: логин: superadmin@example.com пароль: 123456789
 - приятных покупок и удачных продаж! 
 
 Проект разрабатывали:
