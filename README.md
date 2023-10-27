@@ -18,7 +18,7 @@ Technologies used in the project:
 - Spring Boot
 - Spring Data
 - Spring Security
-  -GIT
+- GIT
 - REST
 - Lombok
 - PostgreSQL
