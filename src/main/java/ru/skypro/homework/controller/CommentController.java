@@ -18,13 +18,13 @@ public class CommentController {
     private final CommentService commentService;
 
     @GetMapping("{id}/comments")
-    public ResponseEntity <Comments> getComment(@PathVariable Integer id) {
+    public ResponseEntity<Comments> getComment(@PathVariable Integer id) {
         return ResponseEntity.ok(commentService.getComments(id));
     }
 
     @PostMapping("{id}/comments")
-    public ResponseEntity <Comment> postComments(@PathVariable Integer id,
-                                                 @RequestBody CreateOrUpdateComment text, Authentication authentication) {
+    public ResponseEntity<Comment> postComments(@PathVariable Integer id,
+                                                @RequestBody CreateOrUpdateComment text, Authentication authentication) {
         return ResponseEntity.ok(commentService.add(id, text, authentication.getName()));
     }
 
