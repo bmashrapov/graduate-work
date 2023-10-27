@@ -1,23 +1,24 @@
-Бэкенд-часть платформы для продажи вещей.
+The backend part of the platform for selling goods.
 -
 
-Для разработки использовано техническое задание: https://github.com/BizinMitya/front-react-avito/blob/v1.19/openapi.yaml
+Technical specifications used for development: https://github.com/BizinMitya/front-react-avito/blob/v1.19/openapi.yaml
 
-В процессе разработки реализован следующий функционал:
-- Авторизация и аутентификация пользователей;
-- Ограничение на редактирование и удаление комментария. Ограничение по ролям между пользователями: пользователь и администратор;
-- CRUD операции для объявлений и комментариев на сайте: администратор может удалять или редактировать все объявления и комментарии, а пользователи — только свои;
-- Возможность для авторизованного пользователя оставлять комментарии под каждым объявлением;
-- Демонстрация и сохранение картинок объявлений и аватаров пользователей
+The following functionality was implemented during the development process:
+-
+- Authorization and authentication of users;
+- Restriction on roles between users: user and administrator;
+- CRUD operations for announcements and comments on the site: the administrator can delete or edit all announcements and comments, and users can only delete their own;
+- Possibility for an authorized user to leave comments under each advertisement;
+- Display and save pictures of advertisements and user avatars
 
-Технологии, использованные в проекте:
+Technologies used in the project:
 -
 - Java 11
 - Maven
 - Spring Boot
 - Spring Data
 - Spring Security
-- GIT
+  -GIT
 - REST
 - Lombok
 - PostgreSQL
@@ -25,18 +26,18 @@
 - JUnit
 - Mockito
 
-Инструкция по установке и запуску приложения: 
+Instructions for installing and launching the application:
 -
-- Клонируйте проект в среду разработки;
-- Внесите данные из application.orogin в application.properties и подставьте данные для datasource.url, datasource.username, datasource.password;
-- Запустите Docker образ (docker run -p 3000:3000 --rm ghcr.io/bizinmitya/front-react-avito:v1.19) или воспользуйтесь Postman;
-- Запустите класс HomeworkApplication;
-- Логин и пароль администратора по умолчанию: логин: superadmin@example.com пароль: 123456789
-- приятных покупок и удачных продаж! 
+- Clone the project into the development environment;
+- Enter data from application.orogin into application.properties and substitute data for datasource.url, datasource.username, datasource.password;
+- Run the Docker image (docker run -p 3000:3000 --rm ghcr.io/bizinmitya/front-react-avito:v1.19) or use Postman;
+- Run the HomeworkApplication class;
+- Default administrator login and password: login: superadmin@example.com password: 123456789
+- happy shopping and successful sales!
 
-Проект разрабатывали:
+The project was developed by:
 -
-Команда "TEAM"
-- Бегали - b_mashrapov@mail.ru;
-- Дарья - pazuzu1995@gmail.com;
-- Кирилл - kiruha5854@mail.ru;
+Team "TEAM"
+- Begali - b_mashrapov@mail.ru;
+- Daria - pazuzu1995@gmail.com;
+- Kirill - kiruha5854@mail.ru;
