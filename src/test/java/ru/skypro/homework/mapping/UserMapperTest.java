@@ -61,7 +61,7 @@ class UserMapperTest {
 
     @Test
     void registerReqDtoToEntityTest() {
-       Register req = new Register();
+        Register req = new Register();
         req.setPassword(password);
         req.setRole(role);
         req.setUsername(email);

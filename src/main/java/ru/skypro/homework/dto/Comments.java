@@ -9,5 +9,5 @@ import java.util.List;
 @Data
 public class Comments {
     private Integer count;
-    private List<Comment> comments;
+    private List<Comment> results;
 }

@@ -23,5 +23,6 @@ public interface UserService {
     boolean userExists(String username);
 
     void createUser(UserEntity user);
+
     void uploadImage(MultipartFile image, String name) throws IOException;
 }

@@ -26,17 +26,18 @@ public class AdsController {
     private final ImageService imageService;
 
     @GetMapping
-    public ResponseEntity <Ads> getAds (){
+    public ResponseEntity<Ads> getAds() {
         return ResponseEntity.ok(adService.getAllAds());
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Ad> postAds (@RequestPart CreateOrUpdateAd properties,
-                                   @RequestPart MultipartFile image, Authentication authentication) throws IOException {
-        return ResponseEntity.status(201).body(adService.add(properties,image,authentication.getName()));
+    public ResponseEntity<Ad> postAds(@RequestPart CreateOrUpdateAd properties,
+                                      @RequestPart MultipartFile image, Authentication authentication) throws IOException {
+        return ResponseEntity.status(201).body(adService.add(properties, image, authentication.getName()));
     }
+
     @GetMapping("{id}")
-    public ResponseEntity <ExtendedAd> getById (@PathVariable Integer id){
+    public ResponseEntity<ExtendedAd> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(adService.getFullAdsById(id));
     }
 
@@ -54,16 +55,17 @@ public class AdsController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<Ads> getAdsByRegisterUser (Authentication authentication){
+    public ResponseEntity<Ads> getAdsByRegisterUser(Authentication authentication) {
         return ResponseEntity.ok(adService.getAllMyAds(authentication.getName()));
     }
 
     @PatchMapping(value = "{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> updateImage (@PathVariable(name = "id") Integer id,
-                                       @RequestParam MultipartFile image) throws IOException{
+    public ResponseEntity<?> updateImage(@PathVariable(name = "id") Integer id,
+                                         @RequestParam MultipartFile image) throws IOException {
         adService.uploadImage(id, image);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/image/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable int id) throws IOException {
         long imageId = adService.getEntity(id).getImage().getId();

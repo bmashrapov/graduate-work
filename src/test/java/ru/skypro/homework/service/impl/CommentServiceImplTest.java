@@ -56,10 +56,11 @@ class CommentServiceImplTest {
         Comments response = commentService.getComments(adId);
 
         assertEquals(1, response.getCount());
-        assertEquals(List.of(comment), response.getComments());
+        assertEquals(List.of(comment), response.getResults());
         verify(commentRepository).findAllByAd_Id(adId);
         verify(mapper).entityToCommentDto(commentEntity);
     }
+
     @Test
     void testAdd() {
         int adId = 1;
@@ -82,6 +83,7 @@ class CommentServiceImplTest {
         verify(commentRepository).save(commentEntity);
         verify(mapper).entityToCommentDto(commentEntity);
     }
+
     @Test
     void testDelete() {
         int commentId = 1;
@@ -90,6 +92,7 @@ class CommentServiceImplTest {
 
         verify(commentRepository).deleteById(commentId);
     }
+
     @Test
     void testUpdate() {
         int commentId = 1;
@@ -124,6 +127,7 @@ class CommentServiceImplTest {
         assertSame(commentEntity, result);
         verify(commentRepository).findById(commentId);
     }
+
     @Test
     void testGetEntity_ThrowsFindNoEntityException() {
         int commentId = 1;

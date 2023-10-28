@@ -24,6 +24,7 @@ public class UserController {
     private final UserService userService;
     private final AuthService authService;
     private final ImageService imageService;
+
     @PostMapping("/set_password")
     public ResponseEntity<?> setPassword(@RequestBody NewPassword newPassword,
                                          Authentication authentication) {
@@ -35,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity <User> getInfoAboutRegisterUser (Authentication authentication){
+    public ResponseEntity<User> getInfoAboutRegisterUser(Authentication authentication) {
         return ResponseEntity.ok(userService.get(authentication.getName()));
     }
 
@@ -43,11 +44,13 @@ public class UserController {
     public ResponseEntity<UpdateUser> updateUser(@RequestBody UpdateUser newUser, Authentication authentication) {
         return ResponseEntity.ok(userService.update(newUser, authentication.getName()));
     }
+
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updateUserImage(@RequestPart MultipartFile image, Authentication auth) throws IOException {
         userService.uploadImage(image, auth.getName());
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/image/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable int id) throws IOException {
         long imageId = userService.getEntityById(id).getImage().getId();

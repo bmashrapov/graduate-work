@@ -32,6 +32,7 @@ public class AdEntity {
         this.price = price;
         this.description = description;
     }
+
     public String getImagePath() {
         return image == null ? null : "/ads/image/" + id;
     }
